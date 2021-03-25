@@ -1,0 +1,9 @@
+import csv
+
+
+# opening the file
+def fileopen():
+    with open("tmp.csv", "r", encoding='UTF-8') as file:
+        reader = csv.reader(file, delimiter=";")
+        for row in reader:
+            print(row)
