@@ -30,6 +30,7 @@ with open("tmp.csv", "r", encoding='UTF-8') as file:
         caseNumbers = row[5]
         vps = row[6]
         status = row[7]
-        c.execute('''INSERT INTO court(ourId,party,counterParty,description,officeLocation,caseNumbers,vps,status)
-            VALUES (?,?,?,?,?,?,?,?)''',(ourId,party,counterParty,description,officeLocation,caseNumbers,vps,status))
+        c.execute('''INSERT INTO court(ourID,party,counterParty,description,officeLocation,caseNumbers,vps,status)
+            VALUES (?,?,?,?,?,?,?,?)''', (ourID, party, counterParty, description, officeLocation, caseNumbers,
+                                          vps, status))
         c.commit()
