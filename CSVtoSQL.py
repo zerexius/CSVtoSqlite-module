@@ -1,11 +1,18 @@
 import sqlite3
 import csv
 
+print("--------------------------------------------------------")
+execfile = input("--csv ")
+print("--------------------------------------------------------")
+makeDB = input("--db ")
+print("--------------------------------------------------------")
 
-conn = sqlite3.connect('C:\Coding\ProjectsFile\court.sqlite')
+conn = sqlite3.connect(makeDB)
 c = conn.cursor()
-try:
-    c.execute('''CREATE TABLE cases (
+
+# creates the table in SQLite
+print("Creating Database.\n")
+c.execute('''CREATE TABLE cases (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     ourId TEXT NOT NULL,
     party TEXT NOT NULL,
@@ -17,15 +24,11 @@ try:
     status TEXT, 
     tStamp TEXT DEFAULT CURRENT_TIMESTAMP)''')
 
-except:
-    print("Database already exists, updating existing one!")
-
-# opening the file
-with open("C:\Coding\ProjectsFile\Projects\CSVtoSQL\\tmp.csv", "r", encoding='UTF-8') as file:
+# opening the file and inserting the data into the table
+with open(execfile, "r", encoding='UTF-8') as file:
     reader = csv.reader(file, delimiter=";")
     for row in reader:
-        print(row)
-        ourID = row[0]
+        ourId = row[0]
         party = row[1]
         counterParty = row[2]
         description = row[3]
@@ -33,16 +36,16 @@ with open("C:\Coding\ProjectsFile\Projects\CSVtoSQL\\tmp.csv", "r", encoding='UT
         caseNumbers = row[5]
         vps = row[6]
         status = row[7]
-        c.execute('''INSERT INTO court (ourID,party,counterParty,description,officeLocation,caseNumbers,vps,status)
-            VALUES (?,?,?,?,?,?,?,?)''',
-            (ourID,
-            party,
-            counterParty,
-            description,
-            officeLocation,
-            caseNumbers,
-            vps,
-            status))
-            
+        c.execute('''INSERT INTO cases(ourId,party,counterParty,description,officeLocation,caseNumbers,vps,status) 
+        VALUES (?,?,?,?,?,?,?,?)''',
+                  (ourId,
+                   party,
+                   counterParty,
+                   description,
+                   officeLocation,
+                   caseNumbers,
+                   vps,
+                   status)),
         conn.commit()
-        conn.close()
+    print("Finished.")
+    conn.close()
