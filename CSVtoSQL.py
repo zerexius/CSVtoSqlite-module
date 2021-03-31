@@ -1,9 +1,12 @@
 import sqlite3
 import csv
 
+
 print("--------------------------------------------------------")
+# waits for CSV file input
 execfile = input("--csv ")
 print("--------------------------------------------------------")
+# waits for database name input
 makeDB = input("--db ")
 print("--------------------------------------------------------")
 
