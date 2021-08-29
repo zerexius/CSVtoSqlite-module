@@ -1,6 +1,6 @@
 import sqlite3
 import csv
-
+import os.path
 
 print("--------------------------------------------------------")
 # waits for CSV file input
